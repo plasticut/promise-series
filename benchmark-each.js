@@ -1,10 +1,11 @@
+require('colors');
 const Benchmark = require('benchmark');
 const {eachSeries1, eachSeries2, eachSeries3, eachSeries4} = require('./each');
 
 const memwatch = require('memwatch-next');
 
 memwatch.on('leak', function(info) {
-  console.log('Memwatch leak: ');
+  console.log('Memwatch leak: '.red);
   console.log(info);
 });
 
@@ -29,31 +30,39 @@ suite
 .add('eachSeries1', function(deferred) {
   eachSeries1(data, iterator)
     .then(() => deferred.resolve())
-    .catch(() => deferred.reject());
+    .catch(e => {
+ throw e;
+});
 }, {defer: true})
 
 .add('eachSeries2', function(deferred) {
   eachSeries2(data, iterator)
     .then(() => deferred.resolve())
-    .catch(() => deferred.reject());
+    .catch(e => {
+ throw e;
+});
 }, {defer: true})
 
 .add('eachSeries3', function(deferred) {
   eachSeries3(data, iterator)
     .then(() => deferred.resolve())
-    .catch(() => deferred.reject());
+    .catch(e => {
+ throw e;
+});
 }, {defer: true})
 
 .add('eachSeries4', function(deferred) {
   eachSeries4(data, iterator)
     .then(() => deferred.resolve())
-    .catch(() => deferred.reject());
+    .catch(e => {
+ throw e;
+});
 }, {defer: true})
 
 .on('cycle', function(event) {
-  console.log(String(event.target));
+  console.log(String(event.target).cyan);
 })
 .on('complete', function() {
-  console.log('Fastest is ' + this.filter('fastest').map('name'));
+  console.log(('Fastest is ' + this.filter('fastest').map('name')).green);
 })
-.run({async: true});
+.run();

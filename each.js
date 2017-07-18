@@ -1,16 +1,23 @@
+const {isPromise} = require('./util');
+
 function eachSeries1(arr, iteratorFn) {
   return new Promise((resolve, reject) => {
     const entries = arr.entries();
 
-    let next = () => {
-      const entry = entries.next();
-      if (entry.done) {
+    const next = () => {
+      const {done, value} = entries.next();
+      if (done) {
         return resolve();
       }
-
-      const result = iteratorFn(entry.value[1], entry.value[0]);
-      if (result instanceof Promise) {
-        result.then(next, reject);
+      const index = value[0];
+      // skip deleted items to preserve 'reduce' behaviour
+      if (arr.hasOwnProperty(index)) {
+        const result = iteratorFn(value[1], index);
+        if (isPromise(result)) {
+          result.then(next, reject);
+        } else {
+          next();
+        }
       } else {
         next();
       }
