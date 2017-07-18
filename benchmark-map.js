@@ -31,16 +31,16 @@ suite
   mapSeries1(data, iterator)
     .then(() => deferred.resolve())
     .catch(e => {
- throw e;
-});
+      throw e;
+    });
 }, {defer: true})
 
 .add('mapSeries2', function(deferred) {
   mapSeries2(data, iterator)
     .then(() => deferred.resolve())
     .catch(e => {
- throw e;
-});
+      throw e;
+    });
 }, {defer: true})
 
 .on('cycle', function(event) {

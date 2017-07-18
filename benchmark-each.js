@@ -31,32 +31,32 @@ suite
   eachSeries1(data, iterator)
     .then(() => deferred.resolve())
     .catch(e => {
- throw e;
-});
+      throw e;
+    });
 }, {defer: true})
 
 .add('eachSeries2', function(deferred) {
   eachSeries2(data, iterator)
     .then(() => deferred.resolve())
     .catch(e => {
- throw e;
-});
+      throw e;
+    });
 }, {defer: true})
 
 .add('eachSeries3', function(deferred) {
   eachSeries3(data, iterator)
     .then(() => deferred.resolve())
     .catch(e => {
- throw e;
-});
+      throw e;
+    });
 }, {defer: true})
 
 .add('eachSeries4', function(deferred) {
   eachSeries4(data, iterator)
     .then(() => deferred.resolve())
     .catch(e => {
- throw e;
-});
+      throw e;
+    });
 }, {defer: true})
 
 .on('cycle', function(event) {
